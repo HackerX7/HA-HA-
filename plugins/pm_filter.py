@@ -92,7 +92,8 @@ async def next_page(bot, query):
          [
              InlineKeyboardButton(f'Iɴꜰᴏ', 'reqinfo'),
              InlineKeyboardButton(f'Mᴏᴠɪᴇ', 'minfo'),
-             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo')
+             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo'),
+             InlineKeyboardButton(f'Tɪᴘs', 'tinfo')
          ]
     )
 
@@ -427,6 +428,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "sinfo":
         await query.answer(text=script.SINFO, show_alert=True)
 
+    elif query.data == "tinfo":
+        await query.answer(text=script.TINFO, show_alert=True)
+
     elif query.data == "code":
         await query.answer("നീ ഏതാ..... ഒന്ന് പോടെയ് അവൻ Source Code ചോയ്ച്ച് വന്നിരിക്കുന്നു. നോക്കി ഇരുന്നോ, ഇപ്പൊ കിട്ടും. 😂 മാമനൊടു ഒന്നും തോന്നല്ലേ മക്കളേ. 😊",show_alert=True)
 
@@ -441,6 +445,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('😎 Aʙᴏᴜᴛ', callback_data='about')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text="▣ ▢ ▢"
+        )
+        await query.message.edit_text(
+            text="▣ ▣ ▢"
+        )
+        await query.message.edit_text(
+            text="▣ ▣ ▣"
+        )       
         await query.message.edit_text(
             text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
@@ -459,6 +472,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('🔮 Status', callback_data='stats')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text="▣ ▢ ▢"
+        )
+        await query.message.edit_text(
+            text="▣ ▣ ▢"
+        )
+        await query.message.edit_text(
+            text="▣ ▣ ▣"
+        )       
         await query.message.edit_text(
             text=script.HELP_TXT.format(query.from_user.mention),
             reply_markup=reply_markup,
@@ -698,7 +720,8 @@ async def auto_filter(client, msg, spoll=False):
          [
              InlineKeyboardButton(f'Iɴꜰᴏ', 'reqinfo'),
              InlineKeyboardButton(f'Mᴏᴠɪᴇ', 'minfo'),
-             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo')
+             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo'),
+             InlineKeyboardButton(f'Tɪᴘs', 'tinfo')
          ]
     )
 
