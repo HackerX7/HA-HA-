@@ -82,12 +82,18 @@ async def next_page(bot, query):
             ]
             for file in files
         ]
-
     btn.insert(0,
         [
-            InlineKeyboardButton(f"🔮 {search}", "dupe"),
-            InlineKeyboardButton(f"🗂️ Files: {len(files)}", "dupe")
+            InlineKeyboardButton(f"🎀 {search}", "dupe"),
+            InlineKeyboardButton(f"🗂️ Fɪʟᴇs: {len(files)}", "dupe")
         ]
+    )
+    btn.insert(1, 
+         [
+             InlineKeyboardButton(f'Iɴꜰᴏ', 'reqinfo'),
+             InlineKeyboardButton(f'Mᴏᴠɪᴇ', 'minfo'),
+             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo')
+         ]
     )
 
     if 0 < offset <= 10:
@@ -112,7 +118,8 @@ async def next_page(bot, query):
             [
                 InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
                 InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}"),
+                InlineKeyboardButton(text=f"Check PM!", url=f"https://t.me/{temp.U_NAME}")
             ],
         )
     try:
@@ -410,6 +417,19 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "pages":
         await query.answer()
+
+    elif query.data == "reqinfo":
+        await query.answer(text=script.REQINFO, show_alert=True)
+
+    elif query.data == "minfo":
+        await query.answer(text=script.MINFO, show_alert=True)
+
+    elif query.data == "sinfo":
+        await query.answer(text=script.SINFO, show_alert=True)
+
+    elif query.data == "code":
+        await query.answer("നീ ഏതാ..... ഒന്ന് പോടെയ് അവൻ Source Code ചോയ്ച്ച് വന്നിരിക്കുന്നു. നോക്കി ഇരുന്നോ, ഇപ്പൊ കിട്ടും. 😂 മാമനൊടു ഒന്നും തോന്നല്ലേ മക്കളേ. 😊",show_alert=True)
+
     elif query.data == "start":
         buttons = [[
             InlineKeyboardButton('➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
@@ -447,7 +467,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "about":
         buttons = [[
             InlineKeyboardButton('🎥 Cʜᴀɴɴᴇʟ', url='https://t.me/Team_KL'),
-            InlineKeyboardButton('♥️ Source', callback_data='source')
+            InlineKeyboardButton('♥️ Source', callback_data='code')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
@@ -668,6 +688,19 @@ async def auto_filter(client, msg, spoll=False):
             ]
             for file in files
         ]
+    btn.insert(0,
+        [
+            InlineKeyboardButton(f"🎀 {search}", "dupe"),
+            InlineKeyboardButton(f"🗂️ Fɪʟᴇs: {len(files)}", "dupe")
+        ]
+    )
+    btn.insert(1, 
+         [
+             InlineKeyboardButton(f'Iɴꜰᴏ', 'reqinfo'),
+             InlineKeyboardButton(f'Mᴏᴠɪᴇ', 'minfo'),
+             InlineKeyboardButton(f'Sᴇʀɪᴇs', 'sinfo')
+         ]
+    )
 
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
@@ -683,10 +716,6 @@ async def auto_filter(client, msg, spoll=False):
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages"),
              InlineKeyboardButton(text="CHECK PM!", url=f"https://t.me/{temp.U_NAME}"),]
         )
-        btn.insert(0, 
-            [InlineKeyboardButton(f"🔮 {search}", "dupe"),
-             InlineKeyboardButton(f"🗂️ Files: {total_results}", "dupe")]
-        )    
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
     if imdb:
